@@ -1,0 +1,52 @@
+<odoo>
+    <record id="view_library_borrow_tree" model="ir.ui.view">
+        <field name="name">library.borrow.tree</field>
+        <field name="model">library.borrow</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="student_id"/>
+                <field name="book_id"/>
+                <field name="borrow_date"/>
+                <field name="return_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_library_borrow_form" model="ir.ui.view">
+        <field name="name">library.borrow.form</field>
+        <field name="model">library.borrow</field>
+        <field name="arch" type="xml">
+            <form string="Borrow Book">
+                <header>
+                    <field name="state" widget="statusbar" clickable="1"/>
+
+                    <button name="action_set_available" string="Available" type="object" class="btn-success"/>
+                    <button name="action_set_borrowed" string="Borrowed" type="object" class="btn-primary"/>
+                    <button name="action_set_lost" string="Lost" type="object" class="btn-danger"/>
+
+                    <!-- Odoo 17 compatible Return button -->
+                    <button name="action_set_returned" string="Return" type="object" class="btn-warning"/>
+
+                </header>
+                <sheet>
+                    <group>
+                        <field name="student_id"/>
+                        <field name="book_id"/>
+                        <field name="borrow_date"/>
+                        <field name="return_date"/>
+                    </group>
+                    <footer>
+                        <button string="Close" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_library_borrows" model="ir.actions.act_window">
+        <field name="name">Borrow Records</field>
+        <field name="res_model">library.borrow</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

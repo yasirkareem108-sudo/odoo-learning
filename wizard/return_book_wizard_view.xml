@@ -1,0 +1,32 @@
+<odoo>
+    <!-- Form view for Library Return Wizard -->
+    <record id="view_return_book_wizard_form" model="ir.ui.view">
+        <field name="name">library.return.wizard.form</field>
+        <field name="model">library.return.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Return Book">
+                <group>
+                    <field name="borrow_id" options="{'no_create': True}"/>
+                    <field name="return_date"/>
+                </group>
+                <footer>
+                    <button string="Return"
+                            type="object"
+                            name="action_confirm"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open wizard -->
+    <record id="action_return_book_wizard" model="ir.actions.act_window">
+        <field name="name">Return Book</field>
+        <field name="res_model">library.return.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

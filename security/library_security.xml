@@ -1,0 +1,19 @@
+<odoo>
+    <data noupdate="0">
+        <!-- Library Groups -->
+        <record id="group_library_manager" model="res.groups">
+            <field name="name">Library Manager</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="group_library_user" model="res.groups">
+            <field name="name">Library User</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <!-- Assign Library Manager group to Admin -->
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('library_management.group_library_manager'))]"/>
+        </record>
+    </data>
+</odoo>

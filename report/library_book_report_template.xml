@@ -1,0 +1,70 @@
+<odoo>
+    <template id="library_book_report_template">
+        <t t-call="web.basic_layout">
+
+            <!-- ✅ Variable available inside layout -->
+            <t t-set="library_name" t-value="library_name"/>
+
+            <!-- ✅ Custom Header -->
+            <div class="header" style="text-align:center; margin-bottom:10px;">
+                <img t-att-src="'/library_management/static/src/img/library_logo.png'"
+                     style="max-height:60px; display:block; margin:0 auto 5px auto;"/>
+                <h2>
+                    <t t-esc="library_name + ' Library'"/>
+                </h2>
+            </div>
+
+            <main>
+                <div class="page">
+
+                    <!-- ✅ Centered Report Title -->
+                    <h3 style="text-align:center; margin-bottom:5px;">
+                        Book Report
+                    </h3>
+
+                    <!-- ✅ Left-aligned Book Name Line -->
+                    <h4 style="text-align:left; margin-bottom:15px; font-weight:bold;">
+                        Book Name:
+                        <t t-esc="students_info and students_info[0].get('book_name') or ''"/>
+                    </h4>
+
+                    <!-- ✅ Student Table -->
+                    <table class="table table-condensed"
+                           style="width:100%; border-collapse:collapse;">
+                        <thead>
+                            <tr style="border-bottom:1px solid #000;">
+                                <th style="padding:5px;">Student Name</th>
+                                <th style="padding:5px;">Email</th>
+                                <th style="padding:5px;">Phone</th>
+                                <th style="padding:5px;">Borrow Date</th>
+                                <th style="padding:5px;">Return Date</th>
+                                <th style="padding:5px;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="students_info" t-as="s">
+                                <td style="padding:5px;"><t t-esc="s['name']"/></td>
+                                <td style="padding:5px;"><t t-esc="s['email']"/></td>
+                                <td style="padding:5px;"><t t-esc="s['phone']"/></td>
+                                <td style="padding:5px;"><t t-esc="s['borrow_date']"/></td>
+                                <td style="padding:5px;"><t t-esc="s['return_date']"/></td>
+                                <td style="padding:5px;"><t t-esc="s['state']"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </main>
+
+        </t>
+    </template>
+
+    <record id="library_books_report_action" model="ir.actions.report">
+        <field name="name">Library Books Report</field>
+        <field name="model">library.books.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">library_management.library_book_report_template</field>
+        <field name="report_file">library_management.library_book_report_template</field>
+        <field name="print_report_name">"Book_Report_%s" % (object.book_id.name)</field>
+    </record>
+</odoo>

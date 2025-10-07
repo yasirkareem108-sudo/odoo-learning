@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Template for LibrarySystray component -->
+    <t t-name="library_management.LibrarySystray" owl="1">
+        <div class="o_library_systray">
+            <h3>📚 Borrowed Books</h3>
+            <p>
+                You currently have
+                <t t-esc="state.count"/>
+                borrowed books.
+            </p>
+        </div>
+    </t>
+
+</templates>

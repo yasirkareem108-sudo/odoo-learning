@@ -1,0 +1,88 @@
+<odoo>
+    <!-- Actions -->
+    <record id="action_library_books" model="ir.actions.act_window">
+        <field name="name">Books</field>
+        <field name="res_model">library.book</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new book record
+            </p>
+        </field>
+    </record>
+
+    <record id="action_library_borrows" model="ir.actions.act_window">
+        <field name="name">Borrow Records</field>
+        <field name="res_model">library.borrow</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage borrowed books
+            </p>
+        </field>
+    </record>
+
+    <record id="action_library_students" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_student','=',True)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage students
+            </p>
+        </field>
+    </record>
+
+    <!-- Wizard Action for Book Report -->
+    <record id="action_open_library_books_report_wizard" model="ir.actions.act_window">
+        <field name="name">Book Report Wizard</field>
+        <field name="res_model">library.books.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_library_books_report_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+    <!-- 🔹 Custom Client Action renamed to Custom Action -->
+    <record id="library_action" model="ir.actions.client">
+        <field name="name">Custom Action</field>
+        <field name="tag">LibrarySystray</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_library_root"
+              name="Library Management"
+              sequence="20"
+              groups="base.group_user"/>
+
+    <menuitem id="menu_library_books"
+              name="Books"
+              parent="menu_library_root"
+              action="action_library_books"
+              sequence="10"/>
+
+    <menuitem id="menu_library_borrows"
+              name="Borrow Records"
+              parent="menu_library_root"
+              action="action_library_borrows"
+              sequence="20"/>
+
+    <menuitem id="menu_library_students"
+              name="Students"
+              parent="menu_library_root"
+              action="action_library_students"
+              sequence="25"/>
+
+    <menuitem id="custom_action_id"
+              name="Custom Action"
+              sequence="30"
+              parent="menu_library_root"
+              action="library_action"/>
+
+    <!-- Move Book Report Wizard to the end -->
+    <menuitem id="menu_library_books_report_wizard"
+              name="Book Report Wizard"
+              parent="menu_library_root"
+              action="action_open_library_books_report_wizard"
+              sequence="40"/>
+</odoo>

@@ -1,0 +1,62 @@
+<odoo>
+
+    <!-- Inherit Default Partner Tree to Replace Phone with Membership Status -->
+    <record id="view_res_partner_tree_inherit_student" model="ir.ui.view">
+        <field name="name">res.partner.tree.inherit.student</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <!-- phone field ko membership_status se replace karna -->
+            <xpath expr="//tree/field[@name='phone']" position="replace">
+                <field name="membership_status"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Default Partner Form to Add Is Student -->
+    <record id="view_res_partner_form_inherit_student" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.student</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="inside">
+                <field name="is_student"/>
+            </xpath>
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="Borrowed Books">
+                    <field name="borrowed_books_ids">
+                        <tree>
+                            <field name="book_id"/>
+                            <field name="borrow_date"/>
+                            <field name="return_date"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                </page>
+                <!-- ✅ Membership Tab -->
+                <page string="Membership">
+                    <group>
+                        <field name="membership_type"/>
+                        <field name="membership_start"/>
+                        <field name="membership_end"/>
+                        <field name="membership_fee"/>
+                        <field name="membership_status" readonly="1"/>
+                    </group>
+                    <group>
+                        <button name="action_activate_membership" type="object" string="Activate Membership" class="btn-success"/>
+                        <button name="action_expire_membership" type="object" string="Expire Membership" class="btn-warning"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Student Action -->
+    <record id="action_student" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_student', '=', True)]</field>
+    </record>
+
+</odoo>

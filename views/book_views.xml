@@ -1,0 +1,57 @@
+<odoo>
+    <!-- Book Tree View -->
+    <record id="view_library_book_tree" model="ir.ui.view">
+        <field name="name">library.book.tree</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="author"/>
+                <field name="copies_total"/>
+                <field name="copies_available"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Book Form View -->
+    <record id="view_library_book_form" model="ir.ui.view">
+        <field name="name">library.book.form</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+
+                    <group class="o_row">
+    <!-- Title default style -->
+    <group>
+        <field name="name" string="Title"/>
+    </group>
+
+   <div style="text-align:right; width:100%;">
+    <field name="image" widget="image" options="{'size':[128,128]}" nolabel="1"/>
+
+</div>
+
+</group>
+
+
+
+<!-- Other book details (normal layout) -->
+<group>
+    <field name="author"/>
+    <field name="isbn"/>
+    <field name="copies_total"/>
+    <field name="copies_available"/>
+</group>
+
+
+
+
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

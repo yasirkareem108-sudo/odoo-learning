@@ -1,0 +1,37 @@
+<odoo>
+    <record id="view_library_book_kanban" model="ir.ui.view">
+        <field name="name">library.book.kanban</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_record">
+                            <div class="o_kanban_image">
+                                <field name="image" widget="image" class="oe_avatar"/>
+                            </div>
+                            <div class="o_kanban_details">
+                                <strong><field name="name"/></strong>
+                                <div><field name="author"/></div>
+
+                                <!-- Progressbar updated -->
+                                <div class="o_progressbar"
+                                     t-att-aria-valuenow="record.copies_available.raw_value"
+                                     aria-valuemin="0"
+                                     t-att-aria-valuemax="record.copies_total.raw_value">
+                                    <progress t-att-value="record.copies_available.raw_value"
+                                              t-att-max="record.copies_total.raw_value"/>
+                                    <span>
+                                        <t t-esc="record.copies_available.raw_value"/> /
+                                        <t t-esc="record.copies_total.raw_value"/>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

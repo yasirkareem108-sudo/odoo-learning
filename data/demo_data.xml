@@ -1,0 +1,22 @@
+<odoo>
+    <!-- Demo Book -->
+    <record id="demo_book_1" model="library.book">
+        <field name="name">Odoo Development Essentials</field>
+        <field name="author">Daniel Reis</field>
+        <field name="isbn">978-1784392796</field>
+    </record>
+
+    <!-- Demo Student -->
+    <record id="demo_student_1" model="res.partner">
+        <field name="name">Ali Khan</field>
+        <field name="email">ali@example.com</field>
+    </record>
+
+    <!-- Demo Borrow -->
+    <record id="demo_borrow_1" model="library.borrow">
+        <field name="book_id" ref="demo_book_1"/>
+        <field name="student_id" ref="demo_student_1"/>
+        <field name="borrow_date">2025-09-01</field>
+        <field name="state">borrowed</field>
+    </record>
+</odoo>
